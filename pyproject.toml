@@ -1,0 +1,100 @@
+[build-system]
+requires = ["hatchling==1.32.4"]
+build-backend = "hatchling.build"
+
+[project]
+name = "dsa-in-python"
+version = "0.1.0"
+description = "Typed, tested data structures and algorithms for Python 3.12+, written to be read."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.12"
+authors = [{ name = "Md. Jamil Hossain" }]
+keywords = ["data-structures", "algorithms", "avl-tree", "graph", "heap", "sorting"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Education",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Education",
+    "Typing :: Typed",
+]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/Mdjamilh/dsa-in-python"
+Source = "https://github.com/Mdjamilh/dsa-in-python"
+Issues = "https://github.com/Mdjamilh/dsa-in-python/issues"
+
+[dependency-groups]
+dev = [
+    "pytest==9.1.1",
+    "hypothesis==6.168.5",
+    "pytest-cov==7.1.0",
+    "coverage==7.16.2",
+    "mypy==2.4.0",
+    "ruff==0.16.10",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/dsa"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/dsa", "tests", "bench", "README.md", "LICENSE"]
+
+[tool.pytest.ini_options]
+minversion = "9.0"
+testpaths = ["tests"]
+addopts = ["-ra", "--strict-markers", "--strict-config", "--import-mode=importlib"]
+xfail_strict = true
+
+[tool.coverage.run]
+source = ["dsa"]
+branch = true
+
+[tool.coverage.report]
+fail_under = 95
+show_missing = true
+skip_covered = true
+exclude_also = [
+    "if TYPE_CHECKING:",
+    "@overload",
+    "raise NotImplementedError",
+    "\\.\\.\\.",
+]
+
+[tool.mypy]
+strict = true
+python_version = "3.12"
+files = ["src", "tests", "bench"]
+warn_unreachable = true
+enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = [
+    "E", "W", "F", "I", "B", "UP", "SIM", "C4", "RUF", "PL", "PT", "N", "D", "ANN", "PERF", "RET",
+]
+ignore = [
+    "D105",    # magic methods are documented by the class docstring
+    "D107",    # __init__ is documented by the class docstring
+    "D203",    # conflicts with D211
+    "D213",    # conflicts with D212
+    "PLR2004", # small literal constants are clearer inline in algorithms
+    "PLR0913", # some algorithms naturally take several parameters
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["D", "ANN", "PLR0915", "PLR0912", "N802"]
+"bench/**" = ["D", "T201"]
+
+[tool.ruff.format]
+docstring-code-format = true
