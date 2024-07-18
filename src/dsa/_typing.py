@@ -11,4 +11,4 @@ from typing import Any, Protocol
 class SupportsLessThan(Protocol):
     """Anything that can be ordered with ``<``."""
 
-    def __lt__(self, other: Any, /) -> bool: ...
+    def __lt__(self, other: Any, /) -> bool: ...  # noqa: ANN401 - mirrors typeshed
