@@ -8,6 +8,8 @@ from dsa.structures.hash_map import HashMap
 from dsa.structures.heap import BinaryHeap, PriorityQueue
 from dsa.structures.linked_list import DoublyLinkedList, Node, SinglyLinkedList
 from dsa.structures.stack import Stack, balanced_brackets
+from dsa.structures.trie import Trie
+from dsa.structures.union_find import UnionFind
 
 __all__ = [
     "AVLTree",
@@ -22,5 +24,7 @@ __all__ = [
     "Queue",
     "SinglyLinkedList",
     "Stack",
+    "Trie",
+    "UnionFind",
     "balanced_brackets",
 ]
