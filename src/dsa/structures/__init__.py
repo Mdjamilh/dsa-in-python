@@ -4,6 +4,7 @@ from dsa.structures.avl_tree import AVLTree
 from dsa.structures.bst import BinarySearchTree
 from dsa.structures.deque import Deque, Queue
 from dsa.structures.dynamic_array import DynamicArray
+from dsa.structures.graph import Edge, Graph
 from dsa.structures.hash_map import HashMap
 from dsa.structures.heap import BinaryHeap, PriorityQueue
 from dsa.structures.linked_list import DoublyLinkedList, Node, SinglyLinkedList
@@ -19,6 +20,8 @@ __all__ = [
     "Deque",
     "DoublyLinkedList",
     "DynamicArray",
+    "Edge",
+    "Graph",
     "HashMap",
     "LRUCache",
     "Node",
