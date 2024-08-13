@@ -146,7 +146,7 @@ def test_counting_sort_matches_sorted(data: list[int]) -> None:
     assert counting_sort(data) == sorted(data)
 
 
-@given(st.lists(st.integers(-(2**64), 2**64)), st.sampled_from([2, 10, 16, 256, 1 << 16]))
+@given(st.lists(st.integers(-(2**64), 2**64)), st.sampled_from([2, 10, 16, 256, 4096]))
 def test_radix_sort_matches_sorted(data: list[int], base: int) -> None:
     assert radix_sort(data, base=base) == sorted(data)
 
