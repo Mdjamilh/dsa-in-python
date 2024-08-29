@@ -48,8 +48,15 @@ include = ["src/dsa", "tests", "bench", "README.md", "LICENSE"]
 
 [tool.pytest.ini_options]
 minversion = "9.0"
-testpaths = ["tests"]
-addopts = ["-ra", "--strict-markers", "--strict-config", "--import-mode=importlib"]
+testpaths = ["tests", "src"]
+addopts = [
+    "-ra",
+    "--strict-markers",
+    "--strict-config",
+    "--import-mode=importlib",
+    "--doctest-modules",
+]
+doctest_optionflags = ["NORMALIZE_WHITESPACE"]
 xfail_strict = true
 
 [tool.coverage.run]
