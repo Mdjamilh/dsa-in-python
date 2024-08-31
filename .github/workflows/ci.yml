@@ -71,7 +71,9 @@ jobs:
       - name: Install the wheel into a clean venv and import it
         shell: bash
         run: |
-          python -m venv /tmp/wheel-check
-          if [ -x /tmp/wheel-check/bin/python ]; then py=/tmp/wheel-check/bin/python; else py=/tmp/wheel-check/Scripts/python; fi
+          venv="$RUNNER_TEMP/wheel-check"
+          python -m venv "$venv"
+          if [ -d "$venv/Scripts" ]; then py="$venv/Scripts/python"; else py="$venv/bin/python"; fi
           "$py" -m pip install --quiet dist/*.whl
-          cd /tmp && "$py" -c "import dsa; print(dsa.__version__, len(dsa.__all__), 'names'); assert dsa.AVLTree({1: 2})[1] == 2"
+          cd "$RUNNER_TEMP"
+          "$py" -c "import dsa; print(dsa.__version__, len(dsa.__all__), 'names'); assert dsa.AVLTree({1: 2})[1] == 2"
