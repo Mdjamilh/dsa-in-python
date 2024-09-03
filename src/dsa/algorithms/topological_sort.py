@@ -74,7 +74,9 @@ def _find_cycle[V: Hashable](graph: Graph[V], remaining: set[V]) -> list[V]:
     for u, v, _ in graph.edges():
         if u in remaining and v in remaining:
             predecessor.setdefault(v, u)
-    v = next(iter(remaining))
+    # Start from the first remaining vertex in insertion order, not set order, so
+    # the reported cycle does not depend on hash randomisation.
+    v = next(u for u in graph.vertices() if u in remaining)
     position: dict[V, int] = {}
     walk: list[V] = []
     while v not in position:

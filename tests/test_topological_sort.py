@@ -33,9 +33,8 @@ def test_reports_the_cycle() -> None:
     )
     with pytest.raises(CycleError) as info:
         topological_sort(g)
-    cycle = info.value.cycle
-    assert sorted(cycle) == ["build", "test"]
-    assert "graph has a cycle: " in str(info.value)
+    assert info.value.cycle == ["test", "build"]
+    assert str(info.value) == "graph has a cycle: 'test' -> 'build' -> 'test'"
     assert isinstance(info.value, ValueError)
 
 
